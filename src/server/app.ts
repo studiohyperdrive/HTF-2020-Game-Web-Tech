@@ -5,6 +5,8 @@ import Helmet from 'helmet';
 import Compression from 'compression';
 import Path from 'path';
 
+import { Socket } from './modules/socket';
+
 class App {
 	public instance: Application;
 	public port: string | number;
@@ -24,6 +26,8 @@ class App {
 	public listen(): void {
 		this.instance.listen(this.port, () => {
 			console.log(`🚀 App listening on the port ${this.port}`);
+
+			this.initializeModules();
 		});
 	}
 
@@ -51,6 +55,11 @@ class App {
 		this.instance.get('/', function (req, res) {
 			res.sendFile(Path.join(__dirname, './public', 'index.html'));
 		});
+	}
+
+	private initializeModules() {
+		// Init Sockets
+		const socket = new Socket(this.instance);
 	}
 }
 

@@ -8,8 +8,10 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      # App port
+      # App Port
       - 80:3001
+      # Socket Port
+      - 3005:3005
       # Inspect port
       - 5850:5850
     volumes:
